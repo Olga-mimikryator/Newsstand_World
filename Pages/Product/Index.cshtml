@@ -1,0 +1,37 @@
+﻿@page
+@model Newsstand_World.Pages.Product.IndexModel
+@{
+}
+
+<h1>Список продуктов</h1>
+
+<p>
+    <a asp-page="Create">Добавить новую книгу</a>
+</p>
+
+<table border="1" cellpadding="5">
+    <thead>
+        <tr>
+            <th>Название</th>
+            <th>Тип</th>
+            <th>Цена</th>
+            <th>Количество</th>
+            <th>Производитель</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model.Products)
+        {
+            <tr>
+                <td>@product.Name</td>
+                <td>@product.TypeID</td>
+                <td>@product.Price</td>
+                <td>@product.Quantity</td>
+                <td>@product.PublisherID</td>
+                <td>
+                    <a asp-page="Details" asp-route-id="@product.Id">Открыть</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

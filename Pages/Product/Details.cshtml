@@ -1,0 +1,18 @@
+﻿@page
+@model Newsstand_World.Pages.Product.DetailsModel
+@{
+}
+
+<h1>Информация о продукте</h1>
+
+<div>
+    <p><strong>Название:</strong> @Model.Product.Name</p>
+    <p><strong>Тип:</strong> @Model.Product.TypeID</p>
+    <p><strong>Цена:</strong> @Model.Product.Price</p>
+    <p><strong>Количество экземпляров:</strong> @Model.Product.Quantity</p>
+    <p><strong>Издатель:</strong> @Model.Product.PublisherID</p>
+</div>
+
+<p>
+    <a asp-page="Index">Назад к списку</a>
+</p>

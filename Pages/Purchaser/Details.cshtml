@@ -1,0 +1,17 @@
+﻿@page
+@model Newsstand_World.Pages.Purchaser.DetailsModel
+@{
+}
+
+<h1>Информация о покупателе</h1>
+
+<div>
+    <p><strong>Имя:</strong> @Model.Purchaser.Name</p>
+    <p><strong>Фамилия:</strong> @Model.Purchaser.LastName</p>
+    <p><strong>Телефон:</strong> @Model.Purchaser.Phone</p>
+    <p><strong>Дата рождения:</strong> @Model.Purchaser.BirthDate.ToShortDateString()</p>
+</div>
+
+<p>
+    <a asp-page="Index">Назад к списку</a>
+</p>

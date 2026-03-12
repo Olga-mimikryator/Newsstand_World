@@ -1,0 +1,32 @@
+﻿@page
+@model Newsstand_World.Pages.Purchaser.IndexModel
+@{
+}
+
+<h1>Список покупателей</h1>
+
+<table border="1" cellpadding="5">
+    <thead>
+        <tr>
+            <th>Имя</th>
+            <th>Фамилия</th>
+            <th>Телефон</th>
+            <th>Дата рождения</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var purchaser in Model.Purchasers)
+        {
+            <tr>
+                <td>@purchaser.Name</td>
+                <td>@purchaser.LastName</td>
+                <td>@purchaser.Phone</td>
+                <td>@purchaser.BirthDate.ToShortDateString()</td>
+                <td>
+                    <a asp-page="Details" asp-route-id="@purchaser.Id">Открыть</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
