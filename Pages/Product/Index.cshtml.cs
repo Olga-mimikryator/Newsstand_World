@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 using Newsstand_World.Data;
 using Newsstand_World.Model;
 
@@ -18,7 +19,10 @@ namespace Newsstand_World.Pages.Product
 
         public void OnGet()
         {
-            Products = _context.Products.ToList();
+            Products = _context.Products
+                .Include(p => p.Type)
+                .Include(p => p.Publisher)
+                .ToList();
         }
     }
 }

@@ -2,6 +2,6 @@
 {
     public class ProductType : EFModel
     {
-        public List<Product> Products { get; set; } = new List<Product>();
+        
     }
 }
