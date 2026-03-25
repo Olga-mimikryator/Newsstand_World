@@ -1,10 +1,14 @@
 ﻿@page
-@model Newsstand_World.Pages.Purchaser.DetailsModel
+@model Newsstand_World.Pages.Purchaser.DeleteModel
 @{
-    ViewData["Title"] = "Информация о покупателе";
+    ViewData["Title"] = "Удаление покупателя";
 }
 
-<h1>Информация о покупателе</h1>
+<h1>Удаление покупателя</h1>
+
+<div class="alert alert-danger">
+    <h3>Вы уверены, что хотите удалить этого покупателя?</h3>
+</div>
 
 <div class="card">
     <div class="card-body">
@@ -24,8 +28,8 @@
     </div>
 </div>
 
-<p class="mt-3">
-    <a asp-page="Edit" asp-route-id="@Model.Purchaser.Id" class="btn btn-warning">Редактировать</a>
-    <a asp-page="Delete" asp-route-id="@Model.Purchaser.Id" class="btn btn-danger">Удалить</a>
-    <a asp-page="Index" class="btn btn-secondary">Назад к списку</a>
-</p>
+<form method="post">
+    <input type="hidden" asp-for="Purchaser.Id" />
+    <button type="submit" class="btn btn-danger">Удалить</button>
+    <a asp-page="Index" class="btn btn-secondary">Отмена</a>
+</form>

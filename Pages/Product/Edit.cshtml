@@ -1,12 +1,14 @@
 ﻿@page
-@model Newsstand_World.Pages.Product.CreateModel
+@model Newsstand_World.Pages.Product.EditModel
 @{
-    ViewData["Title"] = "Добавление продукта";
+    ViewData["Title"] = "Редактирование продукта";
 }
 
-<h1>Добавить продукт</h1>
+<h1>Редактирование продукта</h1>
 
 <form method="post">
+    <input type="hidden" asp-for="Product.Id" />
+
     <div class="form-group mb-3">
         <label asp-for="Product.Name" class="form-label">Название</label>
         <input asp-for="Product.Name" class="form-control" />

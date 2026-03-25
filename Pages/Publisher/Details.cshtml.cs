@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Newsstand_World.Data;
 using Newsstand_World.Model;
 
-namespace Newsstand_World.Pages.Purchaser
+namespace Newsstand_World.Pages.Publisher
 {
     public class DetailsModel : PageModel
     {
@@ -15,14 +15,14 @@ namespace Newsstand_World.Pages.Purchaser
             _context = context;
         }
 
-        public Newsstand_World.Model.Purchaser Purchaser { get; set; } = default!;
+        public Newsstand_World.Model.Publisher Publisher { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int id)
         {
-            Purchaser = await _context.Purchasers
+            Publisher = await _context.Publishers
                 .FirstOrDefaultAsync(p => p.Id == id);
 
-            if (Purchaser == null)
+            if (Publisher == null)
             {
                 return NotFound();
             }

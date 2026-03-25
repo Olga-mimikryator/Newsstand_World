@@ -6,5 +6,7 @@ namespace Newsstand_World.Model
     {
         public string? Phone { get; set; }
         public string? Email { get; set; }
+
+        public virtual ICollection<Product> Products { get; set; } = new List<Product>();
     }
 }

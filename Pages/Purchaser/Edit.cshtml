@@ -1,0 +1,44 @@
+﻿@page
+@model Newsstand_World.Pages.Purchaser.EditModel
+@{
+    ViewData["Title"] = "Редактирование покупателя";
+}
+
+<h1>Редактирование покупателя</h1>
+
+<form method="post">
+    <input type="hidden" asp-for="Purchaser.Id" />
+
+    <div class="form-group mb-3">
+        <label asp-for="Purchaser.Name" class="form-label">Имя</label>
+        <input asp-for="Purchaser.Name" class="form-control" />
+        <span asp-validation-for="Purchaser.Name" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label asp-for="Purchaser.LastName" class="form-label">Фамилия</label>
+        <input asp-for="Purchaser.LastName" class="form-control" />
+        <span asp-validation-for="Purchaser.LastName" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label asp-for="Purchaser.Phone" class="form-label">Телефон</label>
+        <input asp-for="Purchaser.Phone" class="form-control" />
+        <span asp-validation-for="Purchaser.Phone" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label asp-for="Purchaser.BirthDate" class="form-label">Дата рождения</label>
+        <input asp-for="Purchaser.BirthDate" class="form-control" type="date" />
+        <span asp-validation-for="Purchaser.BirthDate" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Сохранить</button>
+    <a asp-page="Index" class="btn btn-secondary">Отмена</a>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

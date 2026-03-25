@@ -1,10 +1,9 @@
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Newsstand_World.Data;
 using Newsstand_World.Model;
 
-namespace Newsstand_World.Pages.Product
+namespace Newsstand_World.Pages.ProductType
 {
     public class IndexModel : PageModel
     {
@@ -15,14 +14,11 @@ namespace Newsstand_World.Pages.Product
             _context = context;
         }
 
-        public List<Newsstand_World.Model.Product> Products { get; set; } = new();
+        public List<Newsstand_World.Model.ProductType> ProductTypes { get; set; } = new();
 
         public void OnGet()
         {
-            Products = _context.Products
-                .Include(p => p.Type)
-                .Include(p => p.Publisher)
-                .ToList();
+            ProductTypes = _context.ProductTypes.ToList();
         }
     }
 }
