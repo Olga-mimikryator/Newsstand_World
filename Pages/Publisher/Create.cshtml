@@ -1,0 +1,36 @@
+﻿@page
+@model Newsstand_World.Pages.Publisher.CreateModel
+@{
+    ViewData["Title"] = "Добавление издателя";
+}
+
+<h1>Добавить издателя</h1>
+
+<form method="post">
+    <div class="form-group mb-3">
+        <label asp-for="Publisher.Name" class="form-label">Название</label>
+        <input asp-for="Publisher.Name" class="form-control" />
+        <span asp-validation-for="Publisher.Name" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label asp-for="Publisher.Phone" class="form-label">Телефон</label>
+        <input asp-for="Publisher.Phone" class="form-control" />
+        <span asp-validation-for="Publisher.Phone" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label asp-for="Publisher.Email" class="form-label">Email</label>
+        <input asp-for="Publisher.Email" class="form-control" type="email" />
+        <span asp-validation-for="Publisher.Email" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Сохранить</button>
+    <a asp-page="Index" class="btn btn-secondary">Отмена</a>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

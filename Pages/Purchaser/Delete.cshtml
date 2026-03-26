@@ -1,0 +1,35 @@
+﻿@page
+@model Newsstand_World.Pages.Purchaser.DeleteModel
+@{
+    ViewData["Title"] = "Удаление покупателя";
+}
+
+<h1>Удаление покупателя</h1>
+
+<div class="alert alert-danger">
+    <h3>Вы уверены, что хотите удалить этого покупателя?</h3>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-3">Имя</dt>
+            <dd class="col-sm-9">@Model.Purchaser.Name</dd>
+
+            <dt class="col-sm-3">Фамилия</dt>
+            <dd class="col-sm-9">@Model.Purchaser.LastName</dd>
+
+            <dt class="col-sm-3">Телефон</dt>
+            <dd class="col-sm-9">@Model.Purchaser.Phone</dd>
+
+            <dt class="col-sm-3">Дата рождения</dt>
+            <dd class="col-sm-9">@Model.Purchaser.BirthDate.ToShortDateString()</dd>
+        </dl>
+    </div>
+</div>
+
+<form method="post">
+    <input type="hidden" asp-for="Purchaser.Id" />
+    <button type="submit" class="btn btn-danger">Удалить</button>
+    <a asp-page="Index" class="btn btn-secondary">Отмена</a>
+</form>

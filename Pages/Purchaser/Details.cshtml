@@ -1,0 +1,31 @@
+﻿@page
+@model Newsstand_World.Pages.Purchaser.DetailsModel
+@{
+    ViewData["Title"] = "Информация о покупателе";
+}
+
+<h1>Информация о покупателе</h1>
+
+<div class="card">
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-3">Имя</dt>
+            <dd class="col-sm-9">@Model.Purchaser.Name</dd>
+
+            <dt class="col-sm-3">Фамилия</dt>
+            <dd class="col-sm-9">@Model.Purchaser.LastName</dd>
+
+            <dt class="col-sm-3">Телефон</dt>
+            <dd class="col-sm-9">@Model.Purchaser.Phone</dd>
+
+            <dt class="col-sm-3">Дата рождения</dt>
+            <dd class="col-sm-9">@Model.Purchaser.BirthDate.ToShortDateString()</dd>
+        </dl>
+    </div>
+</div>
+
+<p class="mt-3">
+    <a asp-page="Edit" asp-route-id="@Model.Purchaser.Id" class="btn btn-warning">Редактировать</a>
+    <a asp-page="Delete" asp-route-id="@Model.Purchaser.Id" class="btn btn-danger">Удалить</a>
+    <a asp-page="Index" class="btn btn-secondary">Назад к списку</a>
+</p>
