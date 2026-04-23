@@ -7,16 +7,34 @@
 <h1>Редактирование типа продукта</h1>
 
 <form method="post">
-    <input type="hidden" asp-for="ProductType.Id" />
+    <input type="hidden" 
+     asp-for="ProductType.Id" />
 
     <div class="form-group mb-3">
-        <label asp-for="ProductType.Name" class="form-label">Название</label>
-        <input asp-for="ProductType.Name" class="form-control" />
-        <span asp-validation-for="ProductType.Name" class="text-danger"></span>
+
+        <label asp-for="ProductType.Name"
+               class="form-label">Название
+        </label>
+
+        <input asp-for="ProductType.Name"
+               class="form-control" />
+
+        <span asp-validation-for="ProductType.Name"
+              class="text-danger">
+        </span>
+
     </div>
 
-    <button type="submit" class="btn btn-primary">Сохранить</button>
-    <a asp-page="Index" class="btn btn-secondary">Отмена</a>
+    <button type="submit"
+            class="btn btn-primary">
+            Сохранить
+    </button>
+
+    <a asp-page="Index"
+       class="btn btn-secondary">
+       Отмена
+    </a>
+
 </form>
 
 @section Scripts {

@@ -7,7 +7,10 @@
 <h1>Список издателей</h1>
 
 <p>
-    <a asp-page="Create" class="btn btn-primary">Добавить издателя</a>
+    <a asp-page="Create" 
+       class="btn btn-primary">
+       Добавить издателя
+    </a>
 </p>
 
 <table class="table table-striped table-bordered">
@@ -23,17 +26,46 @@
         @foreach (var publisher in Model.Publishers)
         {
             <tr>
-                <td>@publisher.Name</td>
-                <td>@publisher.Phone</td>
-                <td>@publisher.Email</td>
+
                 <td>
-                    <a asp-page="Details" asp-route-id="@publisher.Id" class="btn btn-sm btn-info">Детали</a>
-                    <a asp-page="Edit" asp-route-id="@publisher.Id" class="btn btn-sm btn-warning">Редактировать</a>
-                    <a asp-page="Delete" asp-route-id="@publisher.Id" class="btn btn-sm btn-danger">Удалить</a>
+                    @publisher.Name
+                </td>
+
+                <td>
+                    @publisher.Phone
+                </td>
+
+                <td>
+                    @publisher.Email
+                </td>
+
+                <td>
+
+                    <a asp-page="Details" 
+                       asp-route-id="@publisher.Id"
+                       class="btn btn-sm btn-info">
+                       Детали
+                    </a>
+
+                    <a asp-page="Edit"
+                       asp-route-id="@publisher.Id" 
+                       class="btn btn-sm btn-warning">
+                       Редактировать
+                    </a>
+
+                    <a asp-page="Delete"
+                       asp-route-id="@publisher.Id"
+                       class="btn btn-sm btn-danger">
+                       Удалить
+                    </a>
+
                 </td>
             </tr>
         }
     </tbody>
 </table>
 
-<a asp-page="/Index" class="btn btn-secondary">На главную</a>
+<a asp-page="/Index"
+   class="btn btn-secondary">
+   На главную
+</a>

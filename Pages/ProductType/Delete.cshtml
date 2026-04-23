@@ -10,21 +10,42 @@
     <h3>Вы уверены, что хотите удалить этот тип продукта?</h3>
     @if (Model.HasRelatedProducts)
     {
-        <p class="mt-2">Внимание! Существуют продукты, связанные с этим типом. Удаление может привести к ошибкам.</p>
+        <p class="mt-2">Внимание! Существуют продукты, 
+                        связанные с этим типом. Удаление 
+                        может привести к ошибкам.
+        </p>
     }
 </div>
 
 <div class="card">
     <div class="card-body">
         <dl class="row">
-            <dt class="col-sm-3">Название</dt>
-            <dd class="col-sm-9">@Model.ProductType.Name</dd>
+
+            <dt class="col-sm-3">
+                Название
+            </dt>
+
+            <dd class="col-sm-9">
+                @Model.ProductType.Name
+            </dd>
+
         </dl>
     </div>
 </div>
 
 <form method="post">
-    <input type="hidden" asp-for="ProductType.Id" />
-    <button type="submit" class="btn btn-danger">Удалить</button>
-    <a asp-page="Index" class="btn btn-secondary">Отмена</a>
+
+    <input type="hidden"
+           asp-for="ProductType.Id" />
+
+    <button type="submit"
+            class="btn btn-danger">
+            Удалить
+    </button>
+
+    <a asp-page="Index" 
+       class="btn btn-secondary">
+       Отмена
+    </a>
+
 </form>
