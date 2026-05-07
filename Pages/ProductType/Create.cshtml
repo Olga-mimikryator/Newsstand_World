@@ -5,35 +5,31 @@
 }
 
 <h1>Добавить тип продукта</h1>
+<hr />
 
-<form method="post">
-    <div class="form-group mb-3">
+<div asp-validation-summary="All" class="alert alert-danger" style="display: none;"></div>
 
-        <label asp-for="ProductType.Name"
-               class="form-label">
-               Название
-        </label>
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <form method="post">
+                    <div class="form-group mb-3">
+                        <label asp-for="ProductType.Name" class="form-label fw-bold">
+                            Название <span class="text-danger">*</span>
+                        </label>
+                        <input asp-for="ProductType.Name" class="form-control" />
+                        <span asp-validation-for="ProductType.Name" class="text-danger small"></span>
+                    </div>
 
-        <input asp-for="ProductType.Name"
-               class="form-control" />
-
-        <span asp-validation-for="ProductType.Name"
-              class="text-danger">
-        </span>
-
+                    <hr />
+                    <button type="submit" class="btn btn-primary">Сохранить</button>
+                    <a asp-page="Index" class="btn btn-secondary">Отмена</a>
+                </form>
+            </div>
+        </div>
     </div>
-
-    <button type="submit" 
-            class="btn btn-primary">
-            Сохранить
-    </button>
-
-    <a asp-page="Index"
-       class="btn btn-secondary">
-       Отмена
-    </a>
-
-</form>
+</div>
 
 @section Scripts {
     @{

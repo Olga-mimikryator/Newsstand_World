@@ -5,111 +5,110 @@
 }
 
 <h1>Добавить продукт</h1>
+<hr />
 
-<form method="post">
-    <div class="form-group mb-3">
+<div asp-validation-summary="All" class="alert alert-danger" style="display: none;"></div>
 
-        <label asp-for="Product.Name"
-               class="form-label">
-               Название
-        </label>
+<div class="row">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-body">
+                <form method="post">
+                    <div class="form-group mb-3">
+                        <label asp-for="Product.Name" 
+                               class="form-label fw-bold">
+                            Название <span class="text-danger">*</span>
+                        </label>
+                        <input asp-for="Product.Name" 
+                               class="form-control" 
+                               placeholder="Введите название продукта" />
+                        <span asp-validation-for="Product.Name" 
+                              class="text-danger small">
+                        </span>
+                    </div>
 
-        <input asp-for="Product.Name"
-         class="form-control" />
+                    <div class="form-group mb-3">
+                        <label asp-for="Product.TypeID" 
+                               class="form-label fw-bold">
+                            Тип продукта <span class="text-danger">*</span>
+                        </label>
+                        <select asp-for="Product.TypeID" 
+                                class="form-select" 
+                                asp-items="Model.TypeList">
+                            <option value="">
+                                -- Выберите тип --
+                            </option>
+                        </select>
+                        <span asp-validation-for="Product.TypeID" 
+                              class="text-danger small">
+                        </span>
+                    </div>
 
-        <span asp-validation-for="Product.Name"
-              class="text-danger">
-        </span>
+                    <div class="form-group mb-3">
+                        <label asp-for="Product.PublisherID" 
+                               class="form-label fw-bold">
+                            Издатель <span class="text-danger">*</span>
+                        </label>
+                        <select asp-for="Product.PublisherID" 
+                                class="form-select" 
+                                asp-items="Model.PublisherList">
+                            <option value="">
+                                -- Выберите издателя --
+                            </option>
+                        </select>
+                        <span asp-validation-for="Product.PublisherID" 
+                              class="text-danger small">
+                        </span>
+                    </div>
 
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group mb-3">
+                                <label asp-for="Product.Price" 
+                                       class="form-label fw-bold">
+                                    Цена <span class="text-danger">*</span>
+                                </label>
+                                <input asp-for="Product.Price" 
+                                       class="form-control" 
+                                       type="number" 
+                                       step="0.01" 
+                                       placeholder="0.00" />
+                                <span asp-validation-for="Product.Price" 
+                                      class="text-danger small">
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group mb-3">
+                                <label asp-for="Product.Quantity" 
+                                       class="form-label fw-bold">
+                                    Количество <span class="text-danger">*</span>
+                                </label>
+                                <input asp-for="Product.Quantity" 
+                                       class="form-control" 
+                                       type="number" 
+                                       placeholder="0" />
+                                <span asp-validation-for="Product.Quantity" 
+                                      class="text-danger small">
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr />
+                    <button type="submit" 
+                            class="btn btn-primary">
+                            Сохранить
+                    </button>
+                    <a asp-page="Index" 
+                       class="btn btn-secondary">
+                       Отмена
+                    </a>
+                </form>
+            </div>
+        </div>
     </div>
-
-    <div class="form-group mb-3">
-
-        <label asp-for="Product.TypeID"
-               class="form-label">
-               Тип продукта
-        </label>
-
-        <select asp-for="Product.TypeID"
-                class="form-control"
-                asp-items="Model.TypeList">
-                <option value="">
-                    -- Выберите тип --
-                </option>
-        </select>
-
-        <span asp-validation-for="Product.TypeID"
-              class="text-danger">
-        </span>
-
-    </div>
-
-    <div class="form-group mb-3">
-
-        <label asp-for="Product.PublisherID"
-               class="form-label">
-               Издатель
-        </label>
-
-        <select asp-for="Product.PublisherID"
-                class="form-control"
-                asp-items="Model.PublisherList">
-                <option value="">
-                    -- Выберите издателя --
-                </option>
-        </select>
-
-        <span asp-validation-for="Product.PublisherID"
-              class="text-danger">
-        </span>
-
-    </div>
-
-    <div class="form-group mb-3">
-
-        <label asp-for="Product.Price"
-               class="form-label">
-               Цена
-        </label>
-
-        <input asp-for="Product.Price"
-               class="form-control"
-               type="number"
-               step="0.01" />
-
-        <span asp-validation-for="Product.Price" 
-              class="text-danger">
-        </span>
-    </div>
-
-    <div class="form-group mb-3">
-
-        <label asp-for="Product.Quantity"
-               class="form-label">
-               Количество
-        </label>
-
-        <input asp-for="Product.Quantity"
-               class="form-control"
-               type="number" />
-
-        <span asp-validation-for="Product.Quantity" 
-              class="text-danger">
-        </span>
-
-    </div>
-
-    <button type="submit"
-            class="btn btn-primary">
-            Сохранить
-    </button>
-
-    <a asp-page="Index"
-       class="btn btn-secondary">
-       Отмена
-    </a>
-
-</form>
+</div>
 
 @section Scripts {
     @{
