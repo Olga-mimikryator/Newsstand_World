@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Newsstand_World.Tests")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5bd1e1033fb8f6703ec14104d2b90e4918d87985")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7ea3cc78f9d550c0b557a652f7d0ddb273749823")]
 [assembly: System.Reflection.AssemblyProductAttribute("Newsstand_World.Tests")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Newsstand_World.Tests")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

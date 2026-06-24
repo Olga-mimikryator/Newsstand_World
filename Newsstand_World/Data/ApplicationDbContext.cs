@@ -15,5 +15,6 @@ namespace Newsstand_World.Data
         public DbSet<Product> Products { get; set; }
         public DbSet<Publisher> Publishers { get; set; }
         public DbSet<Purchaser> Purchasers { get; set; }
+        public DbSet<AuthUser> AuthUsers { get; set; }
     }
 }
