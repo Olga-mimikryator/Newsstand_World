@@ -11,12 +11,12 @@
 using System;
 using System.Reflection;
 
-[assembly: System.Reflection.AssemblyCompanyAttribute("Newsstand_World.Tests")]
+[assembly: System.Reflection.AssemblyCompanyAttribute("Newsstand_World")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+94b621acf062005dbcabf8c3be9b557fe19915fa")]
-[assembly: System.Reflection.AssemblyProductAttribute("Newsstand_World.Tests")]
-[assembly: System.Reflection.AssemblyTitleAttribute("Newsstand_World.Tests")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0b4bacdaa5eb0fef263e9accdd62a941f4c32d91")]
+[assembly: System.Reflection.AssemblyProductAttribute("Newsstand_World")]
+[assembly: System.Reflection.AssemblyTitleAttribute("Newsstand_World")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
 
 // Создано классом WriteCodeFragment MSBuild.

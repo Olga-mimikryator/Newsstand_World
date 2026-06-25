@@ -98,7 +98,7 @@ namespace Newsstand_World.Pages.Account
 
             if (avatarFile == null || avatarFile.Length == 0)
             {
-                ErrorMessage = "Пожалуйста, выберите файл для загрузки.";
+                ErrorMessage = "Необходимо выбрать файл для загрузки.";
                 return Page();
             }
 

@@ -1,0 +1,231 @@
+﻿@page
+@model Newsstand_World.Pages.ChatModel
+@{
+    ViewData["Title"] = "Чат";
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">👥 Онлайн</h5>
+                </div>
+                <div class="card-body" id="onlineUsers" style="max-height: 500px; overflow-y: auto;">
+                    <div class="text-muted text-center">Загрузка...</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-9">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">💬 Общий чат</h5>
+                    <span class="badge bg-light text-dark" id="userCount">0</span>
+                </div>
+                <div class="card-body" id="chatMessages" style="height: 400px; overflow-y: auto;">
+                    <div class="text-muted text-center">Сообщений пока нет</div>
+                </div>
+                <div class="card-footer">
+                    <div class="input-group">
+                        <input type="text" id="messageInput" class="form-control" placeholder="Введите сообщение..." />
+                        <button class="btn btn-primary" id="sendButton">Отправить</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.1/signalr.js">
+    </script>
+    <script>
+        // Передаем данные пользователя из модели
+        const userEmail = "@Model.UserEmail";
+        const userName = "@Model.UserName";
+        const userRole = "@Model.Role";
+
+        console.log("Пользователь:", userName, "Роль:", userRole);
+
+        var connection = new signalR.HubConnectionBuilder()
+            .withUrl("/chatHub")
+            .build();
+
+        var messages = [];
+
+        connection.start()
+            .then(function () {
+                console.log("Подключено к чату");
+                // После подключения запрашиваем онлайн пользователей
+                connection.invoke("GetOnlineUsers")
+                    .then(function(users) {
+                        updateOnlineUsers(users);
+                    })
+                    .catch(function(err) {
+                        console.error(err);
+                    });
+            })
+            .catch(function (err) {
+                console.error("Ошибка подключения:", err.toString());
+                document.getElementById("chatMessages").innerHTML =
+                    `<div class="alert alert-danger">Ошибка подключения к чату: ${err}</div>`;
+            });
+
+        // Загрузка истории
+        connection.on("LoadHistory", function (history) {
+            messages = history;
+            renderMessages();
+        });
+
+        // Получение нового сообщения
+        connection.on("ReceiveMessage", function (message) {
+            messages.push(message);
+            renderMessages();
+            scrollToBottom();
+        });
+
+        // Обновление списка онлайн
+        connection.on("UpdateOnlineUsers", function (users) {
+            updateOnlineUsers(users);
+        });
+
+        // Отправка сообщения
+        document.getElementById("sendButton").addEventListener("click", function () {
+            var message = document.getElementById("messageInput").value;
+            if (message.trim() === "") return;
+
+            console.log("Отправка сообщения:", message);
+
+            connection.invoke("SendMessage", message)
+                .then(function() {
+                    console.log("Сообщение отправлено");
+                })
+                .catch(function (err) {
+                    console.error("Ошибка отправки:", err.toString());
+                    alert("Не удалось отправить сообщение: " + err);
+                });
+
+            document.getElementById("messageInput").value = "";
+        });
+
+        document.getElementById("messageInput").addEventListener("keypress", function (e) {
+            if (e.key === "Enter") {
+                document.getElementById("sendButton").click();
+            }
+        });
+
+        function renderMessages() {
+            var chatDiv = document.getElementById("chatMessages");
+            if (messages.length === 0) {
+                chatDiv.innerHTML = '<div class="text-muted text-center">Сообщений пока нет</div>';
+                return;
+            }
+
+            var html = "";
+            for (var i = messages.length - 1; i >= 0; i--) {
+                var msg = messages[i];
+                var time = new Date(msg.timestamp).toLocaleTimeString('ru-RU');
+
+                var roleBadge = "";
+                if (msg.role === "Admin") {
+                    roleBadge = '<span class="badge bg-danger ms-1">Admin</span>';
+                } else if (msg.role === "Manager") {
+                    roleBadge = '<span class="badge bg-warning ms-1">Manager</span>';
+                }
+
+                // Проверяем, не системное ли сообщение
+                if (msg.userEmail === "System") continue;
+
+                var isOwn = msg.userEmail === userEmail;
+
+                html += `
+                        <div class="message mb-2 ${isOwn ? 'own' : ''}">
+                            <div class="d-flex align-items-center">
+                                <strong>${escapeHtml(msg.userName || msg.userEmail)}</strong>
+                                ${roleBadge}
+                                <span class="text-muted small ms-2">${time}</span>
+                            </div>
+                            <div class="message-text">${escapeHtml(msg.message)}</div>
+                        </div>
+                    `;
+            }
+            chatDiv.innerHTML = html;
+        }
+
+        function updateOnlineUsers(users) {
+            var usersDiv = document.getElementById("onlineUsers");
+            document.getElementById("userCount").textContent = users ? users.length : 0;
+
+            if (!users || users.length === 0) {
+                usersDiv.innerHTML = '<div class="text-muted text-center">Нет пользователей онлайн</div>';
+                return;
+            }
+
+            var html = "";
+            for (var i = 0; i < users.length; i++) {
+                var isOwn = users[i] === userEmail;
+                html += `
+                        <div class="d-flex align-items-center mb-2 p-2 border rounded ${isOwn ? 'bg-primary bg-opacity-10' : ''}">
+                            <span class="status-dot bg-success me-2" style="width: 10px; height: 10px; border-radius: 50%; display: inline-block;"></span>
+                            <span>${escapeHtml(users[i])} ${isOwn ? '(Вы)' : ''}</span>
+                        </div>
+                    `;
+            }
+            usersDiv.innerHTML = html;
+        }
+
+        function scrollToBottom() {
+            var chatDiv = document.getElementById("chatMessages");
+            chatDiv.scrollTop = chatDiv.scrollHeight;
+        }
+
+        function escapeHtml(text) {
+            if (!text) return '';
+            var div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+    </script>
+
+    <style>
+        .message {
+            padding: 8px 12px;
+            border-radius: 10px;
+            background-color: #f8f9fa;
+            max-width: 80%;
+            margin-bottom: 10px;
+        }
+
+            .message.own {
+                background-color: #d1e7dd;
+                margin-left: auto;
+            }
+
+        .message-text {
+            word-wrap: break-word;
+        }
+
+        #chatMessages {
+            scroll-behavior: smooth;
+        }
+
+        .status-dot {
+            animation: pulse 2s infinite;
+        }
+
+        @@keyframes pulse {
+            0% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.5;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+    </style>
+}
