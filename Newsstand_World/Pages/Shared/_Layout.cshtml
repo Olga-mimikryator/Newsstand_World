@@ -36,6 +36,7 @@
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-page="/Purchaser/Index">Покупатели</a>
                             </li>
+
                         }
 
                         @if (User.IsInRole("Admin"))
@@ -44,6 +45,14 @@
                                 <a class="nav-link text-dark" asp-page="/Account/Users/Index">Пользователи</a>
                             </li>
                         }
+
+                        @if (User.Identity?.IsAuthenticated == true)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-page="/Chat">Чат</a>
+                            </li>
+                        }
+
                     </ul>
 
                     <ul class="navbar-nav">

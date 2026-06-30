@@ -1,10 +1,14 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.SignalR;
 using Newsstand_World.Data;
+using Newsstand_World.Hubs;
 using Newsstand_World.Model;
 
 namespace Newsstand_World.Pages.ProductType
 {
+    [Authorize(Roles = "Admin,Manager")]
     public class CreateModel : PageModel
     {
         private readonly ApplicationDbContext _context;
