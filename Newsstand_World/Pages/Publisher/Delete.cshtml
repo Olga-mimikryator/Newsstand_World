@@ -1,0 +1,60 @@
+﻿@page
+@model Newsstand_World.Pages.Publisher.DeleteModel
+@{
+    ViewData["Title"] = "Удаление издателя";
+}
+
+<h1>Удаление издателя</h1>
+
+<div class="alert alert-danger">
+    <h3>Вы уверены, что хотите удалить этого издателя?</h3>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <dl class="row">
+
+            <dt class="col-sm-3">
+                Название
+            </dt>
+
+            <dd class="col-sm-9">
+                @Model.Publisher.Name
+            </dd>
+
+            <dt class="col-sm-3">
+                Телефон
+            </dt>
+
+            <dd class="col-sm-9">
+                @Model.Publisher.Phone
+            </dd>
+
+            <dt class="col-sm-3">
+                Email
+            </dt>
+
+            <dd class="col-sm-9">
+                @Model.Publisher.Email
+            </dd>
+
+        </dl>
+    </div>
+</div>
+
+<form method="post">
+
+    <input type="hidden"
+     asp-for="Publisher.Id" />
+
+    <button type="submit"
+            class="btn btn-danger">
+            Удалить
+    </button>
+
+    <a asp-page="Index"
+       class="btn btn-secondary">
+       Отмена
+    </a>
+
+</form>
